@@ -6,13 +6,20 @@ Inspired by [Tor](https://www.torproject.org) architecture, this project provide
 
 ## Usage
 
-1. Start a few Tor instances with [god](http://godrb.com/). Example with 4 tors:
+1. Clone the project
+
+    ```
+    git clone https://github.com/otobrglez/torrero.git
+    cd torrero
+    ```
+
+2. Start a few Tor instances with [god](http://godrb.com/). Example with 4 tors:
 
     ```
     NUM_OF_TORS=4 god -c tor.god -D
     ```
 
-2. Start [RabbitMQ](https://www.rabbitmq.com) and [MongoDB](https://www.mongodb.org) with [Foreman](http://ddollar.github.io/foreman/).
+3. Start [RabbitMQ](https://www.rabbitmq.com) and [MongoDB](https://www.mongodb.org) with [Foreman](http://ddollar.github.io/foreman/).
     
     ```
     foreman start -f Procfile.development
