@@ -6,19 +6,23 @@ Inspired by [Tor](https://www.torproject.org) architecture, this project provide
 
 ## Usage
 
-1. Start a few Tor's up with [God](http://godrb.com/). 4 for example...
+1. Start a few Tor instances with [god](http://godrb.com/). Example with 4 tors:
 
+    ```
     NUM_OF_TORS=4 god -c tor.god -D
+    ```
 
 2. Start [RabbitMQ](https://www.rabbitmq.com) and [MongoDB](https://www.mongodb.org) with [Foreman](http://ddollar.github.io/foreman/).
-
+    
+    ```
     foreman start -f Procfile.development
+    ```
 
 ## Requirements
 
-- [Tor](https://www.torproject.org) - for anonymous "browsing"
-- [RabbitMQ](https://www.rabbitmq.com) - for messaging and queuing of requests
-- [MongoDB](https://www.mongodb.org) - for response storage
+- [Tor](https://www.torproject.org) - for anonymous browsing.
+- [RabbitMQ](https://www.rabbitmq.com) - for messaging and queuing of requests.
+- [MongoDB](https://www.mongodb.org) - for response storage.
 
 ## Contributions && License
 
