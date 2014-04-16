@@ -1,7 +1,17 @@
+GIT
+  remote: git://github.com/bendiken/tor-ruby.git
+  revision: 5b911932e98a10a8dd2e1e8670c5622848d2faee
+  specs:
+    tor (0.1.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.0)
+    dotenv (0.10.0)
+    foreman (0.63.0)
+      dotenv (>= 0.7)
+      thor (>= 0.13.6)
     god (0.13.4)
     method_source (0.8.2)
     pry (0.9.12.6)
@@ -9,10 +19,13 @@ GEM
       method_source (~> 0.8)
       slop (~> 3.4)
     slop (3.5.0)
+    thor (0.19.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  foreman
   god
   pry
+  tor!

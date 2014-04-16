@@ -1,0 +1,2 @@
+mongo: mongod --dbpath ./data/mongodb --rest
+rabbitmq: rabbitmq-server
