@@ -1,4 +1,3 @@
-class Torrero
+class Torrero; end
 
-end
-
+require_relative "./torrero/fetch"

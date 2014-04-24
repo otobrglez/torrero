@@ -1,2 +1,3 @@
-mongo: mongod --dbpath ./data/mongodb --rest
-rabbitmq: rabbitmq-server
+redis: redis-server redis.conf
+worker: bundle exec sidekiq -q default -e $TORRERO_ENV -c 3 -P tmp/sidekiq.pid -r ./workers
+web:  bundle exec rackup ../config.ru -p $PORT

@@ -19,8 +19,8 @@ Inspired by [Tor](https://www.torproject.org) architecture, this project provide
     NUM_OF_TORS=4 god -c tor.god -D
     ```
 
-3. Start [RabbitMQ](https://www.rabbitmq.com) and [MongoDB](https://www.mongodb.org) with [Foreman](http://ddollar.github.io/foreman/).
-    
+3. Start [Redis](http://redis.io) with [Foreman](http://ddollar.github.io/foreman/).
+
     ```
     foreman start -f Procfile.development
     ```
@@ -28,7 +28,8 @@ Inspired by [Tor](https://www.torproject.org) architecture, this project provide
 ## Requirements
 
 - [Tor](https://www.torproject.org) - for anonymous browsing.
-- [RabbitMQ](https://www.rabbitmq.com) - for messaging and queuing of requests.
+- [Privoxy](http://www.privoxy.org) - for proxying request.
+- [Redis](https://www.rabbitmq.com) - for messaging and queuing of requests.
 - [MongoDB](https://www.mongodb.org) - for response storage.
 
 ## Contributions && License

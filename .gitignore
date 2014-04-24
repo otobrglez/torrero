@@ -1,4 +1,4 @@
 tmp/
 log/
-data/
-!data/mongo
+data/redis/
+pkg
