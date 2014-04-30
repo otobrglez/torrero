@@ -10,10 +10,12 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain,      'torrero-main'
-set :deploy_to,   '/home/ubuntu/torrero-main'
-set :repository,  'git@github.com:otobrglez/torrero.git'
-set :branch,      'master'
+set :domain,        'torrero-main'
+set :deploy_to,     '/home/ubuntu/torrero-main'
+set :repository,    'git@github.com:otobrglez/torrero.git'
+set :branch,        'master'
+set :forward_agent, true
+set :keep_releases, 2
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
