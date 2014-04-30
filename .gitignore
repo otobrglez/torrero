@@ -5,3 +5,4 @@ data/tor/
 data/delegated/
 pkg
 NOTES.md
+.elasticbeanstalk/
