@@ -1,3 +1,6 @@
-redis: redis-server redis.conf
-worker: bundle exec sidekiq -q default -e $TORRERO_ENV -c 3 -P tmp/sidekiq.pid -r ./workers
-web:  bundle exec rackup ../config.ru -p $PORT
+redis:    redis-server redis.conf
+worker:   bundle exec sidekiq -q default -e $TORRERO_ENV -c 3 -P tmp/sidekiq.pid -r ./workers
+web:      bundle exec rackup ../config.ru -p $PORT
+tor:      tor --RunAsDaemon 0 --CookieAuthentication 0 --HashedControlPassword "" --ControlPort $((PORT+TOR_OFFSET+10)) --SocksPort $((PORT+TOR_OFFSET+100)) --DataDirectory data/tor/tor-$((PORT+TOR_OFFSET+1000)) --CircuitBuildTimeout $TOR_CIRCUIT_BUILD_TIMEOUT
+
+delegated: ./pkg/delegated -P $(($PORT+DELEGATED_OFFSET)) SERVER=http SOCKS=localhost:$((PORT+TOR_OFFSET+100)) DGROOT=data/delegated
