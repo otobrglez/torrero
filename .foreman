@@ -1,2 +1,0 @@
-concurrency: redis=0,worker=0,web=0,tor=1
-procfile: Procfile.development
