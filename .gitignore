@@ -4,3 +4,4 @@ data/redis/
 data/tor/
 data/delegated/
 pkg
+NOTES.md
