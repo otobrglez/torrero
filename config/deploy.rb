@@ -4,6 +4,8 @@ require 'mina/git'
 # require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 require 'mina/rvm'    # for rvm support. (http://rvm.io)
 require 'mina_sidekiq/tasks'
+require 'mina-stack'
+# require 'mina-contrib/helpers'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.

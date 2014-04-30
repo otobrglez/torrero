@@ -1,0 +1,2 @@
+redis:    redis-server config/redis.config
+worker:   bundle exec sidekiq -q default -e $TORRERO_ENV -c 3 -P tmp/sidekiq.pid -r ./workers.rb
