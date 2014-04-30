@@ -12,7 +12,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 set :domain,        'torrero-main'
 set :deploy_to,     '/home/ubuntu/torrero-main'
-set :repository,    'git@github.com:otobrglez/torrero.git'
+set :repository,    'https://github.com/otobrglez/torrero.git'
 set :branch,        'master'
 set :forward_agent, true
 set :keep_releases, 2
