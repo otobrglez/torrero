@@ -119,7 +119,7 @@ namespace :haproxy do
 
   desc "Start HAProxy"
   task :start do
-    cmd = "haproxy -f ~/torrero-main/shared/shared/config/haproxy.config
+    cmd = "haproxy -f torrero-main/current/config/haproxy.config
     -p ~/torrero-main/shared/pids/haproxy.pid -D"
     puts cmd
     queue cmd
