@@ -10,10 +10,12 @@ TODO: Write usage example here.
 
 ## Mina tasks for managements
 
-mina setup
-mina tor:start_all  # Starts all Tor daemons
-mina tor:stop_all   # Stops all Tor daemons
-mina tor:config     # Dump configuration for Tors
+    ```
+    mina setup
+    mina tor:start_all  # Starts all Tor daemons
+    mina tor:stop_all   # Stops all Tor daemons
+    mina tor:config     # Dump configuration for Tors
+    ```
 
 ## Requirements
 
