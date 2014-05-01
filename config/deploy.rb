@@ -99,6 +99,8 @@ namespace :tor do
       cmd = "tor #{cli_params} --Log 'notice file ~/torrero-main/shared/log/#{t}.log'"
       queue! %[#{cmd}]
     end
+
+    invoke :'haproxy:update'
   end
 
   desc "Stop tors"
@@ -107,8 +109,30 @@ namespace :tor do
   end
 
   desc "Cat logs"
-  task :cat_logs do
+  task :logs do
     queue %[cat #{deploy_to}/shared/log/t-*.log]
+  end
+
+end
+
+namespace :haproxy do
+
+  desc "Start HAProxy"
+  task :start do
+    cmd = "haproxy -f ~/torrero-main/shared/shared/config/haproxy.config
+    -p ~/torrero-main/shared/pids/haproxy.pid -D"
+    puts cmd
+    queue cmd
+  end
+
+  desc "Stop tors"
+  task :stop do
+    queue %[cat #{deploy_to}/shared/pids/haproxy.pid | xargs kill -s SIGINT]
+  end
+
+  desc "Update HAProxy config for Tors"
+  task :update do
+
   end
 
 end
