@@ -3,8 +3,8 @@ require 'mina/bundler'
 require 'mina/git'
 # require 'mina/rbenv'  # for rbenv support. (http://rbenv.org)
 require 'mina/rvm'    # for rvm support. (http://rvm.io)
-require 'mina_sidekiq/tasks'
-require 'mina-stack'
+# require 'mina_sidekiq/tasks'
+# require 'mina-stack'
 # require 'mina-contrib/helpers'
 
 # Basic settings:
@@ -49,6 +49,9 @@ task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
 
+  queue! %[mkdir -p "#{deploy_to}/tors"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/tors"]
+
   # queue! %[touch "#{deploy_to}/shared/config/database.yml"]
   # queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
 end
@@ -70,10 +73,10 @@ task :deploy => :environment do
   end
 end
 
-# For help in making your deploy script, see the Mina documentation:
-#
-#  - http://nadarei.co/mina
-#  - http://nadarei.co/mina/tasks
-#  - http://nadarei.co/mina/settings
-#  - http://nadarei.co/mina/helpers
+## Torrero tasks ##
+
+desc "Shows logs."
+task :logs do
+  queue %[ls #{deploy_to!}]
+end
 

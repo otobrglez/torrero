@@ -1,0 +1,4 @@
+tors:
+  001:
+    control_port: 8100
+    socks_port: 9100
