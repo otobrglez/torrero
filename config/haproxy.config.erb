@@ -1,23 +1,23 @@
 global
-        daemon
-        maxconn 1024
+  daemon
+  maxconn 1024
 
 defaults
-        mode http
-        timeout connect 5000ms
-        timeout client 50000ms
-        timeout server 50000ms
+  mode http
+  timeout connect 5000ms
+  timeout client 50000ms
+  timeout server 50000ms
 
 frontend rotatingproxies
-        bind *:3128
-        default_backend tors
-        option http_proxy
+  bind *:<%= TORRERO_CONFIG["haproxy"]["haproxy_port"] %>
+  default_backend tors
+  option http_proxy
 
 backend tors
-        option http_proxy
+  option http_proxy
 
-        <% TORRERO_CONFIG["tors"].each do |t, options| %>
-        server <%= t %> localhost:<%= 3000+(t.split("-").last.to_i) %>
-        <% end %>
+  <% TORRERO_CONFIG["tors"].each do |t, options| %>
+  server <%= t %> localhost:<%= 3000+(t.split("-").last.to_i) %>
+  <% end %>
 
-        balance roundrobin
+  balance roundrobin

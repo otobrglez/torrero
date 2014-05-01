@@ -11,5 +11,6 @@ tors:
     PidFile: '<%= "~/torrero-main/shared/pids/t-%d.pid" % i %>'
   <% end %>
 haproxy:
+  haproxy_port: 3113
   pid: ~/torrero-main/shared/pids/haproxy.pid
   config: ~/torrero-main/shared/config/haproxy.config

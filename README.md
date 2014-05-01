@@ -11,16 +11,15 @@ TODO: Write usage example here.
 ## Mina tasks for managements
 
     mina setup                       # Setup infrastructure on your server
+
     mina tor:start_all               # Start Tors
     mina tor:stop_all                # Stop Tors
-
     mina tor:config                  # Dump configuration
     mina tor:logs                    # Cat logs from Tors
 
     mina haproxy:start               # Start HAProxy
     mina haproxy:stop                # Stop HAProxy
     mina haproxy:update              # Update HAProxy configuration for Tors
-
     mina haproxy:config              # Dump configuration
 
 ## Requirements

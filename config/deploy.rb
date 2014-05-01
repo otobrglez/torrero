@@ -143,3 +143,11 @@ namespace :haproxy do
 
 end
 
+namespace :privoxy do
+
+#TODO: Add here.
+
+end
+
+
+
