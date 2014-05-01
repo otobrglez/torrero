@@ -90,7 +90,6 @@ namespace :tor do
   task :config do
     require "pp"
     pp TORRERO_CONFIG
-    # queue %[ls #{deploy_to!}]
   end
 
   desc "Start tors"
@@ -98,8 +97,6 @@ namespace :tor do
     TORRERO_CONFIG["tors"].each do |t, params|
       cli_params = params.to_a.map {|k,v| "--#{k} #{v} \\\n" }.join(" ")
       cmd = "tor #{cli_params} --Log 'notice file ~/torrero-main/shared/log/#{t}.log'"
-
-      puts cmd
       queue! %[#{cmd}]
     end
   end
@@ -108,5 +105,11 @@ namespace :tor do
   task :stop_all do
     queue %[cat #{deploy_to}/shared/pids/t-*.pid | xargs kill -s SIGINT]
   end
+
+  desc "Cat logs"
+  task :cat_logs do
+    queue %[cat #{deploy_to}/shared/log/t-*.log]
+  end
+
 end
 

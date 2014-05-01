@@ -4,9 +4,20 @@ Ultra-massive [Tor](tor)-based Ruby scraper. Proof-of-concept!
 
 Inspired by [Tor](tor), this project provides experimental framework and architecture and foundation for building massive scraper infrastructure for anonymous scraping. Torrero tries to solve problem of scraping on massive scale.
 
+## Usage
+
+TODO: Write usage example here.
+
+## Mina tasks for managements
+
+mina setup
+mina tor:start_all  # Starts all Tor daemons
+mina tor:stop_all   # Stops all Tor daemons
+mina tor:config     # Dump configuration for Tors
+
 ## Requirements
 
-- [Tor](tor) - Tor - anonymity_network
+- [Tor](tor) - Anonymity network
 
 ## Contributions && License
 
