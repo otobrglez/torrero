@@ -30,7 +30,7 @@ set :keep_releases, 2
 
 # Manually create these paths in shared/ (eg: shared/config/database.yml) in your server.
 # They will be linked in the 'deploy:link_shared_paths' step.
-set :shared_paths, ['log']
+set :shared_paths, ['log', 'tors']
 
 # Optional settings:
 #   set :user, 'foobar'    # Username in the server to SSH to.
@@ -85,6 +85,15 @@ task :deploy => :environment do
 end
 
 ## Torrero tasks ##
+namespace :torrero do
+
+  desc "Start everything (Tors, Privoxys and HAProxy)"
+  task :start do
+    invoke :'tor:start_all'
+    invoke :'haproxy:start'
+  end
+
+end
 
 namespace :tor do
   desc "Dump configuration"
@@ -95,10 +104,19 @@ namespace :tor do
 
   desc "Start Tors"
   task :start_all do
+    invoke :'privoxy:update'
+
     TORRERO_CONFIG["tors"].each do |t, params|
+
+      # Start Tor as daemon
       cli_params = params.to_a.map {|k,v| "--#{k} #{v} \\\n" }.join(" ")
       cmd = "tor #{cli_params} --Log 'notice file ~/torrero-main/shared/log/#{t}.log'"
-      queue! %[#{cmd}]
+
+      # Start Privoxy
+      cmd_2 = "privoxy --pidfile ~/torrero-main/shared/pids/privoxy-%s.pid ~/torrero-main/shared/config/privoxy-%s.config" % [t,t]
+
+      queue %[#{cmd}]
+      queue %[#{cmd_2}]
     end
 
     invoke :'haproxy:update'
@@ -107,6 +125,8 @@ namespace :tor do
   desc "Stop Tors"
   task :stop_all do
     queue %[cat #{deploy_to}/shared/pids/t-*.pid | xargs kill -s SIGINT]
+    queue %[cat #{deploy_to}/shared/pids/privoxy-*.pid | xargs kill -s SIGINT]
+
   end
 
   desc "Cat logs from Tors"
@@ -133,6 +153,7 @@ namespace :haproxy do
 
   desc "Stop HAProxy"
   task :stop do
+    #TODO: Not the right signal
     queue %[cat #{TORRERO_CONFIG['haproxy']['pid']} | xargs kill -s SIGINT]
   end
 
@@ -145,7 +166,17 @@ end
 
 namespace :privoxy do
 
-#TODO: Add here.
+  desc "Update Privoxy configuration"
+  task :update do
+    i = 0
+    TORRERO_CONFIG["tors"].each do |tor, params|
+      config = ERB.new(File.read("config/privoxy.config.erb")).result(binding)
+      cmd = %[echo "#{config}" > ~/torrero-main/shared/config/privoxy-%s.config] % tor
+      queue cmd
+
+      i = i + 1
+    end
+  end
 
 end
 
