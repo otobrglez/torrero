@@ -1,3 +1,5 @@
+require 'erb'
+require 'yaml'
 require 'mina/bundler'
 # require 'mina/rails'
 require 'mina/git'
@@ -6,12 +8,17 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 # require 'mina_sidekiq/tasks'
 # require 'mina-stack'
 # require 'mina-contrib/helpers'
+require 'dotenv'
+
+Dotenv.load
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
 #   deploy_to    - Path to deploy into.
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
+
+TORRERO_CONFIG = YAML.load(ERB.new(File.read("config/torrero.yml")).result)
 
 set :domain,        'torrero-main'
 set :deploy_to,     '/home/ubuntu/torrero-main'
@@ -49,8 +56,8 @@ task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/config"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/config"]
 
-  queue! %[mkdir -p "#{deploy_to}/tors"]
-  queue! %[chmod g+rx,u+rwx "#{deploy_to}/tors"]
+  queue! %[mkdir -p "#{deploy_to}/shared/tors"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tors"]
 
   # queue! %[touch "#{deploy_to}/shared/config/database.yml"]
   # queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
@@ -75,8 +82,19 @@ end
 
 ## Torrero tasks ##
 
-desc "Shows logs."
-task :logs do
-  queue %[ls #{deploy_to!}]
+namespace :tor do
+  desc "Dump configuration"
+  task :config do
+    require "pp"
+    pp TORRERO_CONFIG
+    # queue %[ls #{deploy_to!}]
+  end
+
+  desc "Start"
+  task :start do
+    TORRERO_CONFIG["tors"].each do |t|
+
+    end
+  end
 end
 

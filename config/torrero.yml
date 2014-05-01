@@ -1,4 +1,12 @@
 tors:
-  001:
-    control_port: 8100
-    socks_port: 9100
+  <% (0..ENV["NUMBER_OF_TORS"].to_i).each do |i| %>
+  <%= "t-%d" % i %>:
+    RunAsDaemon: 1
+    CookieAuthentication: 0
+    HashedControlPassword: <%= ENV["TOR_HASHED_CONTROL_PASSWORD"] || "" %>
+    CircuitBuildTimeout: 10
+    ControlPort: 8100
+    SocksPort: 9100
+    DataDirectory: '<%= "~/torrero-main/shared/tors/t-%d" % i %>'
+    PidFile: '<%= "~/torrero-main/shared/tors/t-%d" % i %>'
+  <% end %>

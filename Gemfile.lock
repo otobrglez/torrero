@@ -42,6 +42,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  dotenv
   foreman
   mina
   mina-sidekiq
