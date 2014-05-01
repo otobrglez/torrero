@@ -5,8 +5,8 @@ tors:
     CookieAuthentication: 0
     HashedControlPassword: <%= ENV["TOR_HASHED_CONTROL_PASSWORD"] || "" %>
     CircuitBuildTimeout: 10
-    ControlPort: 8100
-    SocksPort: 9100
+    ControlPort: <%= 8000+i %>
+    SocksPort: <%= 9000+i %>
     DataDirectory: '<%= "~/torrero-main/shared/tors/t-%d" % i %>'
-    PidFile: '<%= "~/torrero-main/shared/tors/t-%d" % i %>'
+    PidFile: '<%= "~/torrero-main/shared/pids/t-%d.pid" % i %>'
   <% end %>

@@ -59,6 +59,9 @@ task :setup => :environment do
   queue! %[mkdir -p "#{deploy_to}/shared/tors"]
   queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/tors"]
 
+  queue! %[mkdir -p "#{deploy_to}/shared/pids"]
+  queue! %[chmod g+rx,u+rwx "#{deploy_to}/shared/pids"]
+
   # queue! %[touch "#{deploy_to}/shared/config/database.yml"]
   # queue  %[echo "-----> Be sure to edit 'shared/config/database.yml'."]
 end
@@ -90,11 +93,20 @@ namespace :tor do
     # queue %[ls #{deploy_to!}]
   end
 
-  desc "Start"
-  task :start do
-    TORRERO_CONFIG["tors"].each do |t|
+  desc "Start tors"
+  task :start_all do
+    TORRERO_CONFIG["tors"].each do |t, params|
+      cli_params = params.to_a.map {|k,v| "--#{k} #{v} \\\n" }.join(" ")
+      cmd = "tor #{cli_params} --Log 'notice file ~/torrero-main/shared/log/#{t}.log'"
 
+      puts cmd
+      queue! %[#{cmd}]
     end
+  end
+
+  desc "Stop tors"
+  task :stop_all do
+    queue %[cat #{deploy_to}/shared/pids/t-*.pid | xargs kill -s SIGINT]
   end
 end
 
