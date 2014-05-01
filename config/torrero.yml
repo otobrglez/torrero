@@ -10,3 +10,6 @@ tors:
     DataDirectory: '<%= "~/torrero-main/shared/tors/t-%d" % i %>'
     PidFile: '<%= "~/torrero-main/shared/pids/t-%d.pid" % i %>'
   <% end %>
+haproxy:
+  pid: ~/torrero-main/shared/pids/haproxy.pid
+  config: ~/torrero-main/shared/config/haproxy.config

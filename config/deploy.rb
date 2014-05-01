@@ -19,6 +19,7 @@ Dotenv.load
 #   branch       - Branch name to deploy. (needed by mina/git)
 
 TORRERO_CONFIG = YAML.load(ERB.new(File.read("config/torrero.yml")).result)
+HAPROXY_CONFIG = ERB.new(File.read("config/haproxy.config.erb")).result
 
 set :domain,        'torrero-main'
 set :deploy_to,     '/home/ubuntu/torrero-main'
@@ -92,7 +93,7 @@ namespace :tor do
     pp TORRERO_CONFIG
   end
 
-  desc "Start tors"
+  desc "Start Tors"
   task :start_all do
     TORRERO_CONFIG["tors"].each do |t, params|
       cli_params = params.to_a.map {|k,v| "--#{k} #{v} \\\n" }.join(" ")
@@ -103,12 +104,12 @@ namespace :tor do
     invoke :'haproxy:update'
   end
 
-  desc "Stop tors"
+  desc "Stop Tors"
   task :stop_all do
     queue %[cat #{deploy_to}/shared/pids/t-*.pid | xargs kill -s SIGINT]
   end
 
-  desc "Cat logs"
+  desc "Cat logs from Tors"
   task :logs do
     queue %[cat #{deploy_to}/shared/log/t-*.log]
   end
@@ -117,22 +118,27 @@ end
 
 namespace :haproxy do
 
+  desc "Dump configuration"
+  task :config do
+    require "pp"
+    puts HAPROXY_CONFIG
+  end
+
   desc "Start HAProxy"
   task :start do
-    cmd = "haproxy -f torrero-main/current/config/haproxy.config
-    -p ~/torrero-main/shared/pids/haproxy.pid -D"
-    puts cmd
+    invoke :'haproxy:update'
+    cmd = "haproxy -f #{TORRERO_CONFIG['haproxy']['config']} -p #{TORRERO_CONFIG['haproxy']['pid']} -D"
     queue cmd
   end
 
-  desc "Stop tors"
+  desc "Stop HAProxy"
   task :stop do
-    queue %[cat #{deploy_to}/shared/pids/haproxy.pid | xargs kill -s SIGINT]
+    queue %[cat #{TORRERO_CONFIG['haproxy']['pid']} | xargs kill -s SIGINT]
   end
 
-  desc "Update HAProxy config for Tors"
+  desc "Update HAProxy configuration for Tors"
   task :update do
-
+    queue %[echo "#{HAPROXY_CONFIG}" > #{TORRERO_CONFIG['haproxy']['config']}]
   end
 
 end
