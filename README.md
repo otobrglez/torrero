@@ -8,7 +8,13 @@ Inspired by [Tor][tor], this project provides experimental framework / architect
 
 ## Usage
 
-TODO: Write usage example here.
+Starts 10 [Tor][tor] deamons, 10 [Privoxy][privoxy] instances and [HAProxy][haproxy], all pre-configured and ready to use!
+
+    NUMBER_OF_TORS=10 mina torrero:start
+
+Point your client to server, port 3113...
+
+    curl --proxy torrero-main:3113 http://icanhazip.com/
 
 ## Mina tasks for managements
 
