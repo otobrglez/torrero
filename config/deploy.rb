@@ -93,6 +93,12 @@ namespace :torrero do
     invoke :'haproxy:start'
   end
 
+  desc "Stop everything (Tors, Privoxys and HAProxy)"
+  task :stop do
+    invoke :'tor:stop_all'
+    invoke :'haproxy:stop'
+  end
+
 end
 
 namespace :tor do
