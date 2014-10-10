@@ -53,7 +53,7 @@ I also suggest that you use [Monit](http://mmonit.com/monit/) for monitoring all
 ## Benchmarking
 
     ab -X torrero-main:3113 -n 1000 -c 100 -v 2 http://icanhazip.com/
-		ruby torrero_test.rb
+    ruby torrero_test.rb
 
 ## Contributions && License
 
