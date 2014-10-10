@@ -1,6 +1,6 @@
 # Torrero
 
-Ultra-massive [Tor](tor)-based Ruby scraper. Proof-of-concept!
+Ultra-massive [Tor](tor)-based HA proxy. Build for anonymous scraping on large scale. Proof-of-concept!
 
 Inspired by [Tor][tor], this project provides experimental framework / architecture and foundation for building infrastructure for massive anonymous scraping.
 
