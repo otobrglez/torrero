@@ -4,6 +4,8 @@ Ultra-massive [Tor](tor)-based Ruby scraper. Proof-of-concept!
 
 Inspired by [Tor][tor], this project provides experimental framework / architecture and foundation for building infrastructure for massive anonymous scraping.
 
+![torrero-demo][torrero-demo]
+
 - [Oto Brglez](http://github.com/otobrglez)
 
 ## Usage
@@ -56,3 +58,4 @@ This project is under [LGPL](https://www.gnu.org/licenses/lgpl.html) you can do 
 [redis]:https://www.rabbitmq.com
 [mongodb]:https://www.mongodb.org
 [haproxy]:http://haproxy.1wt.eu/
+[torrero-demo]:torrero-demo.gif
