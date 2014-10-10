@@ -38,6 +38,10 @@ Point your client to server, port 3113...
 - [Tor][tor] - Anonymity network
 - [HAProxy][haproxy] - High Performance TCP/HTTP Load Balancer
 
+## Monit
+
+I also suggest that you use [Monit](http://mmonit.com/monit/) for monitoring all services. Configuration can be found in [config](config/monit.conf) folder.
+
 ## Contributions && License
 
 This project is under [LGPL](https://www.gnu.org/licenses/lgpl.html) you can do whatever you want with it. Contributions are more than welcome. Thanks!
