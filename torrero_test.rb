@@ -5,6 +5,8 @@ require 'net/http'
 require 'openssl'
 require 'logger'
 
+$logger = Logger.new(STDOUT)
+
 def fetch(url,other_headers={})
   start = DateTime.now
   uri = URI.parse(url)
@@ -32,6 +34,8 @@ def fetch(url,other_headers={})
   output = http.request request
 
   completed = '%.3f' % ((DateTime.now - start) * 24 * 60 * 60).to_f
+	
+	$logger.info("Completed in #{completed}")
 
   case output
   when Net::HTTPSuccess, Net::HTTPRedirection then
@@ -48,6 +52,7 @@ end
 output = {"OK" => 0, "FAIL" => 0, "OTHER" => 0}
 1000.times do |t|
   value = fetch(ENV["URL"] || "http://icanhazip.com/")
+	$logger.info("Completed with #{value}")
   output[value] += 1
 end
 

@@ -50,6 +50,11 @@ Point your client to server, port 3113...
 
 I also suggest that you use [Monit](http://mmonit.com/monit/) for monitoring all services. Configuration can be found in [config](config/monit.conf) folder.
 
+## Benchmarking
+
+    ab -X torrero-main:3113 -n 1000 -c 100 -v 2 http://icanhazip.com/
+		ruby torrero_test.rb
+
 ## Contributions && License
 
 This project is under [LGPL](https://www.gnu.org/licenses/lgpl.html) you can do whatever you want with it. Contributions are more than welcome. Thanks!
