@@ -37,8 +37,14 @@ Point your client to server, port 3113...
 
 ## Requirements
 
-- [Tor][tor] - Anonymity network
+- [Tor][tor] - Anonymity network client
 - [HAProxy][haproxy] - High Performance TCP/HTTP Load Balancer
+- [Monit][monit] - Monit - utility for monitoring services on a Unix system
+- [Privoxy][privoxy] - Privacy enhancing HTTP Proxy
+
+## Packages on Ubuntu
+
+    sudo apt-get install tor haproxy monit privoxy -y
 
 ## Monit
 
@@ -59,3 +65,5 @@ This project is under [LGPL](https://www.gnu.org/licenses/lgpl.html) you can do 
 [mongodb]:https://www.mongodb.org
 [haproxy]:http://haproxy.1wt.eu/
 [torrero-demo]:torrero-demo.gif
+[monit]:http://mmonit.com/monit/
+[privoxy]:http://www.privoxy.org/
